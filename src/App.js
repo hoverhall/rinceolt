@@ -1,25 +1,55 @@
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
+import { connect } from 'react-redux'
+import imageManager from './imageManager';
+import Loader from './Loader'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      meta: {}
+    }
+  }
+
+  componentDidMount () {
+
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Loader />
+        <div className="header-menu-bar">
+          <div>
+            <img src={imageManager.logo} alt="logo" />
+          </div>
+        </div>
+        <header className="App-header">
+          <div className="img" style={{backgroundImage: `url(${imageManager.header})`, backgroundPositionX: "center"}}>
+          </div>
+          <div className="bars">
+            <span className="bar selected"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </div>
+          <div className="content"></div>
+        </header>
+        <footer>
+          
+        </footer>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state /*, ownProps*/) => {
+  return {
+    counter: state,
+  }
+}
+
+const mapDispatchToProps = {  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
